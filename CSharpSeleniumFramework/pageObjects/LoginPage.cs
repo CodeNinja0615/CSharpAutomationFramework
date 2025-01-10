@@ -32,9 +32,20 @@ namespace CSharpSeleniumFramework.pageObjects
         [FindsBy(How = How.XPath, Using = "//input[@value='Sign In']")]
         private IWebElement signIn;
 
-        public void Login()
+        /// <summary>
+        /// this makes username publically accessible
+        /// </summary>
+        /// <returns></returns>
+        public IWebElement getUserName()
         {
-
+            return username;
+        } 
+        public void ValidLogin(String userid, String pass)
+        {
+            username.SendKeys(userid);
+            password.SendKeys(pass);
+            checkBox.Click();
+            signIn.Click();
         }
     }
 }

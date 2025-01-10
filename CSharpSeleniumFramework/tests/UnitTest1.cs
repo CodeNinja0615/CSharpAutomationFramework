@@ -17,9 +17,7 @@ namespace CSharpSeleniumFramework.tests
             string[] actualProducts = new string[2];
             //driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
             LoginPage loginPage = new LoginPage(getDriver());
-            driver.FindElement(By.Name("password")).SendKeys("learning");
-            driver.FindElement(By.XPath("//div[@class='form-group'][5]/label/span/input")).Click();
-            driver.FindElement(By.XPath("//input[@value='Sign In']")).Click();
+            loginPage.ValidLogin(userid: "rahulshettyacademy", pass: "learning");
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.PartialLinkText("Checkout")));
 
