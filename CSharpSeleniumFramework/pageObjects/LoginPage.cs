@@ -40,12 +40,13 @@ namespace CSharpSeleniumFramework.pageObjects
         {
             return username;
         } 
-        public void ValidLogin(String userid, String pass)
+        public ProductsPage ValidLogin(String userid, String pass)
         {
             username.SendKeys(userid);
             password.SendKeys(pass);
             checkBox.Click();
             signIn.Click();
+            return new ProductsPage(driver);
         }
     }
 }

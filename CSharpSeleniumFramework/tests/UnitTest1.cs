@@ -17,25 +17,20 @@ namespace CSharpSeleniumFramework.tests
             string[] actualProducts = new string[2];
             //driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
             LoginPage loginPage = new LoginPage(getDriver());
-            loginPage.ValidLogin(userid: "rahulshettyacademy", pass: "learning");
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.PartialLinkText("Checkout")));
 
-            IList<IWebElement> products = driver.FindElements(By.TagName("app-card"));
-
+            ProductsPage productPage = loginPage.ValidLogin(userid: "rahulshettyacademy", pass: "learning");
+            productPage.WaitForPageToDisplay();
+            IList<IWebElement> products = productPage.getCards();
             foreach (IWebElement product in products)
             {
-
-                if (expectedProducts.Contains(product.FindElement(By.CssSelector(".card-title a")).Text))
-
+                if (expectedProducts.Contains(product.FindElement(productPage.getCardTitle()).Text))
                 {
-                    product.FindElement(By.CssSelector(".card-footer button")).Click();
+                    product.FindElement(productPage.getAddToCart()).Click();
                 }
-                TestContext.Progress.WriteLine(product.FindElement(By.CssSelector(".card-title a")).Text);
-
             }
-            driver.FindElement(By.PartialLinkText("Checkout")).Click();
-            IList<IWebElement> checkoutCards = driver.FindElements(By.CssSelector("h4 a"));
+
+            CheckoutPage checkoutPage = productPage.checkout();
+            IList<IWebElement> checkoutCards = checkoutPage.CheckoutCards();
 
             for (int i = 0; i < checkoutCards.Count; i++)
 
@@ -47,12 +42,8 @@ namespace CSharpSeleniumFramework.tests
             }
             Assert.That(expectedProducts, Is.EqualTo(actualProducts));
 
-            driver.FindElement(By.CssSelector(".btn-success")).Click();
-
-            driver.FindElement(By.Id("country")).SendKeys("ind");
-
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.LinkText("India")));
-            driver.FindElement(By.LinkText("India")).Click();
+            CountryPage countryPage = checkoutPage.Checkout();
+            countryPage.SelectCountry();
 
 
             driver.FindElement(By.CssSelector("label[for*='checkbox2']")).Click();
