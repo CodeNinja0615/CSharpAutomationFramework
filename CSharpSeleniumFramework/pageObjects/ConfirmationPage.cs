@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace CSharpSeleniumFramework.pageObjects
 {
-    public class CountryPage
+    public class ConfirmationPage
     {
         private IWebDriver driver;
-        public CountryPage(IWebDriver driver)
+        public ConfirmationPage(IWebDriver driver)
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
@@ -22,13 +22,25 @@ namespace CSharpSeleniumFramework.pageObjects
         private IWebElement country;
         [FindsBy(How = How.LinkText, Using = "India")]
         private IWebElement countryLink;
-
+        [FindsBy(How = How.CssSelector, Using = "label[for*='checkbox2']")]
+        private IWebElement checkBox;
+        [FindsBy(How = How.CssSelector, Using = "[value='Purchase']")]
+        private IWebElement purchaseButton;
+        [FindsBy(How = How.CssSelector, Using = ".alert-success")]
+        private IWebElement successMessage;
         private By India = By.LinkText("India");
         public void SelectCountry()
         {
             country.SendKeys("ind");
             new CommonFunctions(driver).WaitForElementToAppear(India);
             countryLink.Click();
+        }
+
+        public String ConfirmPurchase()
+        {
+            checkBox.Click();
+            purchaseButton.Click();
+            return successMessage.Text;
         }
     }
 }

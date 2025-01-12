@@ -26,10 +26,10 @@ namespace CSharpSeleniumFramework.pageObjects
             return checkoutCards;
         }
 
-        public CountryPage Checkout()
+        public ConfirmationPage Checkout()
         {
             checkoutButton.Click();
-            return new CountryPage(driver);
+            return new ConfirmationPage(driver);
         }
     }
 }

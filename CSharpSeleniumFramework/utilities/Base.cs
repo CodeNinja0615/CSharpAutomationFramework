@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
+using CSharpSeleniumFramework.testData;
 
 namespace CSharpSeleniumFramework.utilities
 {
@@ -54,6 +55,10 @@ namespace CSharpSeleniumFramework.utilities
             }
         }
 
+        public static JSONReader GetDataParser()
+        {
+            return new JSONReader();
+        }
         [TearDown]
         public void CloseBrowser()
         {

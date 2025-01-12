@@ -18,7 +18,7 @@ namespace CSharpSeleniumFramework.utilities
 
         public void WaitForElementToAppear(By by)
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
+            WebDriverWait wait = new WebDriverWait(this.driver, TimeSpan.FromSeconds(10));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(by));
 
         }
