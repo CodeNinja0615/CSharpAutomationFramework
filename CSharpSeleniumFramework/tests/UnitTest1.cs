@@ -8,11 +8,13 @@ using CSharpSeleniumFramework.testData;
 
 namespace CSharpSeleniumFramework.tests
 {
+    [Parallelizable(ParallelScope.Children)] //---Parallel execution of all method in a class & use .Self to run this class in parallel with mutliple class
     public class Tests : Base
     {
         [Test, TestCaseSource(nameof(AddTestDataConfig))]
         //[TestCase("rahulshettyacademy", "learning")]
         //[TestCase("rahulshettyacademy", "learning")]
+        //[Parallelizable(ParallelScope.All)] //---All data sets parallel execution
         public void EndToEndFlow(String userName, String password, String[] expectedProducts)
         {
             string[] actualProducts = new string[2];
@@ -51,6 +53,11 @@ namespace CSharpSeleniumFramework.tests
 
         }
 
+        [Test]
+        public void Test2()
+        {
+            TestContext.Progress.WriteLine("Test 2");
+        }
         public static IEnumerable<TestCaseData> AddTestDataConfig()
         {
             yield return new TestCaseData(GetDataParser().ExtractData("username"), GetDataParser().ExtractData("password"), GetDataParser().ExtractDataArray("products"));
