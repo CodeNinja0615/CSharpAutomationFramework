@@ -8,10 +8,10 @@ using CSharpSeleniumFramework.testData;
 
 namespace CSharpSeleniumFramework.tests
 {
-    [Parallelizable(ParallelScope.Children)] //---Parallel execution of all method in a class & use .Self to run this class in parallel with mutliple class
+    [Parallelizable(ParallelScope.All)] //---Parallel execution of all method in a class & use .Self to run this class in parallel with mutliple class
     public class Tests : Base
     {
-        [Test, TestCaseSource(nameof(AddTestDataConfig))]
+        [Test, TestCaseSource(nameof(AddTestDataConfig)), Category("Smoke")]
         //[TestCase("rahulshettyacademy", "learning")]
         //[TestCase("rahulshettyacademy", "learning")]
         //[Parallelizable(ParallelScope.All)] //---All data sets parallel execution
@@ -53,10 +53,16 @@ namespace CSharpSeleniumFramework.tests
 
         }
 
-        [Test]
+        [Test, Category("Regression")]
         public void Test2()
         {
             TestContext.Progress.WriteLine("Test 2");
+        }
+
+        [Test, Category("Smoke")]
+        public void Test3()
+        {
+            TestContext.Progress.WriteLine("Test 3");
         }
         public static IEnumerable<TestCaseData> AddTestDataConfig()
         {
@@ -64,6 +70,7 @@ namespace CSharpSeleniumFramework.tests
             yield return new TestCaseData(GetDataParser().ExtractData("username_wrong"), GetDataParser().ExtractData("password_wrong"), GetDataParser().ExtractDataArray("products"));
             yield return new TestCaseData(GetDataParser().ExtractData("username"), GetDataParser().ExtractData("password"), GetDataParser().ExtractDataArray("products"));
         }
+
 
 
         /// <summary>

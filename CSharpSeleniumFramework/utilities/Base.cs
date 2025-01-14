@@ -14,21 +14,19 @@ namespace CSharpSeleniumFramework.utilities
 {
     public class Base
     {
+        String browserName;
         //public IWebDriver driver;
         public ThreadLocal<IWebDriver> driver = new();// ThreadLocal<IWebDriver>();
 
         [SetUp]
         public void StartBrowser()
         {
-            String browserName = ConfigurationManager.AppSettings["browser"];
+            browserName = TestContext.Parameters["browserName"];
             if (browserName == null)
             {
-                InitBrowser("Edge");
+                browserName = ConfigurationManager.AppSettings["browser"];
             }
-            else
-            {
-                InitBrowser(browserName);
-            }
+            InitBrowser(browserName);
             driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Value.Manage().Window.Maximize();
             driver.Value.Url = "https://rahulshettyacademy.com/loginpagePractise/";
@@ -67,3 +65,5 @@ namespace CSharpSeleniumFramework.utilities
         }
     }
 }
+
+// dotnet test CSharpSeleniumFramework.csproj --filter TestCategory=Regression --% -- TestRunParameters.Parameter(name=\"browserName\",value=\"Edge\")
