@@ -89,7 +89,7 @@ namespace CSharpSeleniumFramework.utilities
             if(status == TestStatus.Failed)
             {
                 test.Fail("Test Failed", CaptureScreenShot(driver.Value, fileName));
-                test.Log(Status.Fail, $"Test Failed with logtrace {stacktrace}");
+                test.Log(Status.Fail, $"Test failed with logtrace {stacktrace}");
             }
             else if(status == TestStatus.Passed)
             {
