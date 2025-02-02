@@ -10,10 +10,10 @@ using CSharpSeleniumFramework.utilities;
 
 namespace CSharpSeleniumFramework.pageObjects
 {
-    public class ProductsPage
+    public class ProductsPage: CommonFunctions
     {
         private IWebDriver driver;
-        public ProductsPage(IWebDriver driver) 
+        public ProductsPage(IWebDriver driver): base(driver)
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
@@ -29,7 +29,7 @@ namespace CSharpSeleniumFramework.pageObjects
         private By addToCart = By.CssSelector(".card-footer button");
         public void WaitForPageToDisplay()
         {
-            new CommonFunctions(driver).WaitForElementToAppear(checkOut);
+            WaitForElementToAppear(checkOut);
             //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
             //wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(checkOut));
 

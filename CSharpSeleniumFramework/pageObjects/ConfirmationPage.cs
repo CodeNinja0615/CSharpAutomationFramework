@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace CSharpSeleniumFramework.pageObjects
 {
-    public class ConfirmationPage
+    public class ConfirmationPage: CommonFunctions
     {
         private IWebDriver driver;
-        public ConfirmationPage(IWebDriver driver)
+        public ConfirmationPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
@@ -32,7 +32,7 @@ namespace CSharpSeleniumFramework.pageObjects
         public void SelectCountry()
         {
             country.SendKeys("ind");
-            new CommonFunctions(driver).WaitForElementToAppear(India);
+            WaitForElementToAppear(India);
             countryLink.Click();
         }
 

@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using CSharpSeleniumFramework.utilities;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace CSharpSeleniumFramework.pageObjects
 {
-    public class LoginPage
+    public class LoginPage: CommonFunctions
     {
         private IWebDriver driver;
-        public LoginPage(IWebDriver driver) 
+        public LoginPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
