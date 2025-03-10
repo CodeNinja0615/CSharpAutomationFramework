@@ -1,0 +1,53 @@
+trigger:
+- master
+
+# Schedule to run daily at 5 AM UTC
+schedules:
+- cron: "0 5 * * *"
+  displayName: "Daily 5 AM Test Run"
+  branches:
+    include:
+    - master
+  always: true  # Ensures the pipeline runs even if there are no code changes
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run Selenium Tests'
+  inputs:
+    command: 'test'
+    projects: 'CSharpSeleniumFramework/CSharpSeleniumFramework.csproj'
+    arguments: '--no-restore --no-build --filter TestCategory!=Flaky' # Exclude flaky tests if tagged
+
+# Publish test results
+- task: PublishTestResults@2
+  displayName: 'Publish NUnit Test Results'
+  inputs:
+    testResultsFormat: 'NUnit'
+    testResultsFiles: '**/TestResults/*.xml'
+    mergeTestResults: true
+    failTaskOnFailedTests: true
