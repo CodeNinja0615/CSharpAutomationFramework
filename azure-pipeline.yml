@@ -1,14 +1,13 @@
 trigger:
 - master
 
-# Schedule to run daily at 5 AM UTC
 schedules:
-- cron: "0 5 * * *"
-  displayName: "Daily 5 AM Test Run"
+- cron: "30 23 * * *"
+  displayName: "Daily 5 AM IST Test Run"
   branches:
     include:
     - master
-  always: true  # Ensures the pipeline runs even if there are no code changes
+  always: true # Ensures the pipeline runs even if there are no code changes
 
 pool:
   vmImage: 'windows-latest'
@@ -41,13 +40,3 @@ steps:
   inputs:
     command: 'test'
     projects: 'CSharpSeleniumFramework/CSharpSeleniumFramework.csproj'
-    arguments: '--no-restore --no-build --filter TestCategory!=Flaky' # Exclude flaky tests if tagged
-
-# Publish test results
-- task: PublishTestResults@2
-  displayName: 'Publish NUnit Test Results'
-  inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: '**/TestResults/*.xml'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
