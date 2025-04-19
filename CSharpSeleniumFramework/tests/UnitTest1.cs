@@ -36,12 +36,8 @@ namespace CSharpSeleniumFramework.tests
             IList<IWebElement> checkoutCards = checkoutPage.CheckoutCards();
 
             for (int i = 0; i < checkoutCards.Count; i++)
-
             {
                 actualProducts[i] = checkoutCards[i].Text;
-
-
-
             }
             Assert.That(expectedProducts, Is.EqualTo(actualProducts));
 
