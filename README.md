@@ -51,6 +51,8 @@ You can easily switch browsers by modifying the `App.config`:
 </Target>
 ```
 
+---
+
 # 💻 Running Tests via CLI
  Ensure you have the .NET SDK installed. Use the following commands to run your tests:
 
@@ -68,16 +70,17 @@ dotnet test --filter TestCategory=Smoke
 ```bash
 dotnet test --filter FullyQualifiedName=YourNamespace.YourClass.YourTestMethod
 ```
+---
 
 # 🔁 CI/CD Integration
 
 ## ✅ Jenkins
- Add parameters for browser selection
- Use dotnet test in build steps
- Archive test results using NUnit XML output
+ - Add parameters for browser selection
+ - Use dotnet test in build steps
+ - Archive test results using NUnit XML output
 
 ## ✅ Azure DevOps
- Add dotnet test in a .yml pipeline
+ - Add dotnet test in a .yml pipeline
 
 # 📊 Reporting (Optional Add-ons)
  🔍 Allure / ExtentReports / ReportUnit integration for enhanced visual test reports
@@ -93,6 +96,7 @@ dotnet test --logger:nunit
  ```bash
  dotnet test --logger:"nunit;LogFilePath=TestResults/NUnitResults.xml"
 ```
+---
 
 ## 🤝 Contributing
  Pull requests and feedback are always welcome. Let's build something better together!
