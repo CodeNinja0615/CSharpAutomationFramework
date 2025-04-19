@@ -37,7 +37,7 @@ You can easily switch browsers by modifying the `App.config`:
 ```
 
 # 🔄 .csproj Configuration
-## To ensure your test data and config files are handled correctly during the build, add the following to your .csproj:
+ To ensure your test data and config files are handled correctly during the build, add the following to your .csproj:
 
 ```xml
 <ItemGroup>
@@ -52,7 +52,7 @@ You can easily switch browsers by modifying the `App.config`:
 ```
 
 # 💻 Running Tests via CLI
-## Ensure you have the .NET SDK installed. Use the following commands to run your tests:
+ Ensure you have the .NET SDK installed. Use the following commands to run your tests:
 
 ### ▶️ Run All Tests
 ```bash
@@ -72,17 +72,18 @@ dotnet test --filter FullyQualifiedName=YourNamespace.YourClass.YourTestMethod
 # 🔁 CI/CD Integration
 
 ## ✅ Jenkins
-### Add parameters for browser selection
-### Use dotnet test in build steps
-### Archive test results using NUnit XML output
+ Add parameters for browser selection
+ Use dotnet test in build steps
+ Archive test results using NUnit XML output
 
 ## ✅ Azure DevOps
-### Add dotnet test in a .yml pipeline
+ Add dotnet test in a .yml pipeline
 
 # 📊 Reporting (Optional Add-ons)
-### 🔍 Allure / ExtentReports / ReportUnit integration for enhanced visual test reports
+ 🔍 Allure / ExtentReports / ReportUnit integration for enhanced visual test reports
+
 # 🗂️ NUnit XML Output
-## When you run tests with dotnet test, NUnit by default outputs TRX (Test Result XML format by Microsoft). But if you want NUnit-style XML, you can explicitly configure it.
+ When you run tests with dotnet test, NUnit by default outputs TRX (Test Result XML format by Microsoft). But if you want NUnit-style XML, you can explicitly configure it.
 
 ### 💡 Run with NUnit XML output:
 ```bash
@@ -93,5 +94,5 @@ dotnet test --logger:nunit
  dotnet test --logger:"nunit;LogFilePath=TestResults/NUnitResults.xml"
 ```
 
-# 🤝 Contributing
-### Pull requests and feedback are always welcome. Let's build something better together!
+## 🤝 Contributing
+ Pull requests and feedback are always welcome. Let's build something better together!
