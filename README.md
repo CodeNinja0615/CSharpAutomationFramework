@@ -17,7 +17,7 @@ A powerful and extensible automation framework built using **Selenium WebDriver*
 - 📂 **Supports JSON-based test data**
 - ☁️ **Azure DevOps & Jenkins integration ready**
 - 📦 **Extensible structure for page objects, utilities, and test categories**
-- 🧵 Parallel test execution support
+- 🧵 **Parallel test execution support**
 
 ---
 
