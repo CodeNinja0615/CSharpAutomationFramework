@@ -18,38 +18,29 @@ namespace CSharpSeleniumFramework.utilities
 {
     public class Base
     {
-        String browserName;
-        public ExtentReports extent;
+        string? browserName;
         public ExtentTest test;
         [OneTimeSetUp]
         public void Setup()
         {
-            string workingDirectory = Environment.CurrentDirectory;
-            string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            String reportPath = projectDirectory + "//index.html";
-            var htmpRporter = new ExtentSparkReporter(reportPath);
-            extent = new ExtentReports();
-            extent.AttachReporter(htmpRporter);
-            extent.AddSystemInfo("Host Name", "Local host");
-            extent.AddSystemInfo("Environment", "QA");
-            extent.AddSystemInfo("UserName", "Sameer Akhtar");
         }
         //public IWebDriver driver;
-        public ThreadLocal<IWebDriver> driver = new();// ThreadLocal<IWebDriver>();
+        public ThreadLocal<IWebDriver>? driver = new();// ThreadLocal<IWebDriver>();
 
         [SetUp]
         public void StartBrowser()
         {
-            test =extent.CreateTest(TestContext.CurrentContext.Test.Name);
+            test = AssemblySetupAndTeardown.extent.CreateTest(TestContext.CurrentContext.Test.Name);
             browserName = TestContext.Parameters["browserName"];
             if (browserName == null)
             {
                 browserName = ConfigurationManager.AppSettings["browser"];
             }
-            InitBrowser(browserName);
+            InitBrowser(browserName!);
             driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Value.Manage().Window.Maximize();
-            driver.Value.Url = "https://rahulshettyacademy.com/loginpagePractise/";
+            // driver.Value.Url = "https://rahulshettyacademy.com/loginpagePractise/";
+            driver.Value.Navigate().GoToUrl("https://rahulshettyacademy.com/loginpagePractise/");
         }
 
         public IWebDriver getDriver()
@@ -65,7 +56,9 @@ namespace CSharpSeleniumFramework.utilities
                     break;
 
                 case "Chrome":
-                    driver.Value = new ChromeDriver();
+                    ChromeOptions options = new();
+                    options.AddArgument("--incognito");
+                    driver.Value = new ChromeDriver(options);
                     break;
 
                 case "Edge":
@@ -100,7 +93,6 @@ namespace CSharpSeleniumFramework.utilities
         }
         [OneTimeTearDown]
         public void tearDown(){
-            extent.Flush();
         }
         public Media CaptureScreenShot(IWebDriver driver, String screenshotName)
         {

@@ -11,10 +11,11 @@ namespace CSharpSeleniumFramework.tests
     [Parallelizable(ParallelScope.All)] //---Parallel execution of all method in a class & use .Self to run this class in parallel with mutliple class
     public class Tests : Base
     {
-        [Test, TestCaseSource(nameof(AddTestDataConfig)), Category("Smoke")]
+        [Test, TestCaseSource(nameof(AddTestDataConfig)), Category("Smoke"), Order(1)]
         //[TestCase("rahulshettyacademy", "learning")]
         //[TestCase("rahulshettyacademy", "learning")]
         //[Parallelizable(ParallelScope.All)] //---All data sets parallel execution
+        [NonParallelizable]
         public void EndToEndFlow(String userName, String password, String[] expectedProducts)
         {
             string[] actualProducts = new string[2];
@@ -49,7 +50,7 @@ namespace CSharpSeleniumFramework.tests
 
         }
 
-        [Test, Category("Regression")]
+        [Test, Category("Regression"), Order(2)]
         public void Test2()
         {
             TestContext.Progress.WriteLine("Test 2");
