@@ -18,14 +18,14 @@ public class AssemblySetupAndTeardown
         String reportPath = projectDirectory + "//index.html";
         var htmpRporter = new ExtentSparkReporter(reportPath);
         htmpRporter.Config.Theme = AventStack.ExtentReports.Reporter.Config.Theme.Dark;
-        htmpRporter.Config.DocumentTitle = "Playwright Test Automation Report";
+        htmpRporter.Config.DocumentTitle = "Selenium Test Automation Report";
         htmpRporter.Config.ReportName = "E2E Test Suite Report";
         extent = new ExtentReports();
         extent.AttachReporter(htmpRporter);
         extent.AddSystemInfo("Host Name", "Local host");
         extent.AddSystemInfo("Environment", "QA");
         extent.AddSystemInfo("UserName", "Sameer Akhtar");
-        extent.AddSystemInfo("Framework", "Playwright with NUnit");
+        extent.AddSystemInfo("Framework", "Selenium with NUnit");
     }
 
     [OneTimeTearDown]
